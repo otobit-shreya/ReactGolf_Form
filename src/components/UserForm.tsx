@@ -32,20 +32,19 @@ const UserForm: React.FC = () => {
       <Box
         sx={{
           margin: "auto",
-          marginTop: "2rem",
-          width: 500,
-          height: 350,
-
-          //    backgroundColor:"lightgray"
+          // backgroundColor:"gray"
+       
+       
+         
         }}
       >
-        <Grid lg={20} item container spacing={3}>
-          <Grid item lg={6} xs={10} sm={12}>
+        <Grid lg={8} item container spacing={3}  style={{ margin:"auto", padding:"5rem"}}>
+          <Grid item lg={6} xs={20} sm={10}>
             <label htmlFor="username">
               <b>User Name</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={5} sm={6}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="text"
               id="username"
@@ -53,12 +52,12 @@ const UserForm: React.FC = () => {
               value={userName}
             />
           </Grid>
-          <Grid item lg={6} xs={10} sm={12}>
+          <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="email">
               <b>E- Mail Address</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={5} sm={6}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="email"
               id="email"
@@ -66,12 +65,12 @@ const UserForm: React.FC = () => {
               value={email}
             />
           </Grid>
-          <Grid item lg={6} xs={10} sm={12}>
+          <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="password">
               <b>Password</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={5} sm={6}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="password"
               id="password"
@@ -79,12 +78,12 @@ const UserForm: React.FC = () => {
               value={password}
             />
           </Grid>
-          <Grid item lg={6} xs={10} sm={12}>
+          <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="mobile">
               <b>Mobile No.</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={5} sm={6}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="number"
               id="mobile"
@@ -92,12 +91,12 @@ const UserForm: React.FC = () => {
               value={mobileNo}
             />
           </Grid>
-          <Grid item lg={6} xs={10} sm={12}>
+          <Grid item lg={6} xs={20} sm={12}>
             <label>
               <b>Role</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={5} sm={6}>
+          <Grid item lg={6} xs={15} sm={6}>
             <select onChange={(e) => setRole(e.target.value)} value={role}>
               <option>Select</option>
               <option>Floor Manager</option>
