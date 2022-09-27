@@ -6,32 +6,13 @@ import classes from "./UserForm.module.css";
 const UserForm: React.FC= () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState<string | number>("");
+  const [password, setPassword] = useState<string>("");
   const [mobileNo, setMobileNo] = useState<string | number>("");
   const [role, setRole] = useState("");
   const [lockUser, setLockUser] = useState(false);
  
 
-  const userNameChangeHandler= (e:any) => {
-    setUserName(e.target.value);
-  };
-
-  const emailChangeHandler = (e:any) => {
-    setEmail(e.target.value);
-  };
-
-  const passwordChangeHandler = (e:any) => {
-    setPassword(e.target.value);
-  };
-
-  const mobileNoChangeHandler = (e:any) => {
-    setMobileNo(e.target.value);
-  };
-
-  const roleChangeHandler = (e:any) => {
-    setRole(e.target.value);
-  };
-
+ 
 
   const checkChangeHandler:any= () => {
     setLockUser(!lockUser);
@@ -75,7 +56,7 @@ const UserForm: React.FC= () => {
             <input 
             type="text" 
             id="username" 
-            onChange={userNameChangeHandler}
+            onChange={(e)=>setUserName(e.target.value)}
              value={userName}/>
           </Grid>
           <Grid item lg={6} xs={10} sm={12}>
@@ -87,7 +68,7 @@ const UserForm: React.FC= () => {
             <input 
             type="email" 
             id="email" 
-            onChange={emailChangeHandler} 
+            onChange={(e)=>setEmail(e.target.value)} 
             value={email} />
           </Grid>
           <Grid item lg={6} xs={10} sm={12}>
@@ -99,7 +80,7 @@ const UserForm: React.FC= () => {
             <input
               type="password"
               id="password"
-              onChange={passwordChangeHandler}
+              onChange={(e)=>setPassword(e.target.value)}
               value={password}
             />
           </Grid>
@@ -111,7 +92,7 @@ const UserForm: React.FC= () => {
           <Grid item lg={6} xs={5} sm={6}>
             <input type="number"
              id="mobile" 
-             onChange={mobileNoChangeHandler}
+             onChange={(e)=>setMobileNo(e.target.value)}
              value={mobileNo}
              />
           </Grid>
@@ -121,7 +102,7 @@ const UserForm: React.FC= () => {
             </label>
           </Grid>
           <Grid item lg={6} xs={5} sm={6}>
-            <select onChange={roleChangeHandler} value={role}>
+            <select onChange={(e)=>setRole(e.target.value)} value={role}>
               <option >Select</option>
               <option>Floor Manager</option>
               <option>Option2</option>
