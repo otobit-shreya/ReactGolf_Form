@@ -44,7 +44,7 @@ const UserForm: React.FC = () => {
               <b>User Name</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={6}>
+          <Grid item lg={6} xs={15} sm={8}>
             <input
               type="text"
               id="username"
@@ -57,7 +57,7 @@ const UserForm: React.FC = () => {
               <b>E- Mail Address</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={6}>
+          <Grid item lg={6} xs={15} sm={8}>
             <input
               type="email"
               id="email"
@@ -70,7 +70,7 @@ const UserForm: React.FC = () => {
               <b>Password</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={6}>
+          <Grid item lg={6} xs={15} sm={8}>
             <input
               type="password"
               id="password"
@@ -83,7 +83,7 @@ const UserForm: React.FC = () => {
               <b>Mobile No.</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={6}>
+          <Grid item lg={6} xs={15} sm={8}>
             <input
               type="number"
               id="mobile"
@@ -96,7 +96,7 @@ const UserForm: React.FC = () => {
               <b>Role</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={6}>
+          <Grid item lg={6} xs={15} sm={8}>
             <select onChange={(e) => setRole(e.target.value)} value={role}>
               <option>Select</option>
               <option>Floor Manager</option>
