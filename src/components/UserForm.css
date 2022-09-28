@@ -20,6 +20,10 @@ justify-content: center;
       width: 80%;
      
   }
+  input.input-error,
+  select.input-error{
+    border-color:red;
+  }
   
   select{
       height: 1.5rem;
@@ -36,4 +40,12 @@ justify-content: center;
   .actions:hover {
       background-color: rgb(52, 52, 198);
   }
+  .actions:disabled{
+    opacity: 0.35;
+  }
   
+.error{
+    color: red;
+    font-size: 11px;
+    margin-top: 0px;
+}

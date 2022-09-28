@@ -1,125 +1,180 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
 import { Grid, Box, Checkbox } from "@mui/material";
-import classes from "./UserForm.module.css";
+import "./UserForm.css";
+import { validations } from "./schemas/validations";
 
-const UserForm: React.FC = () => {
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState<string>("");
-  const [mobileNo, setMobileNo] = useState<string | number>("");
-  const [role, setRole] = useState("");
+const UserForm: React.FC<{}> = () => {
+  const onSubmit = (values: any, actions: any) => {
+    console.log(values);
+    console.log(actions);
+    actions.resetForm();
+   setLockUser(checkChangeHandler);
+  }; 
   const [lockUser, setLockUser] = useState(false);
 
   const checkChangeHandler: any = () => {
     setLockUser(!lockUser);
   };
-
-  const formSubmitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
-    const info = { userName, email, password, mobileNo, role, lockUser };
-    console.log(info);
-
-    setUserName("");
-    setEmail("");
-    setPassword("");
-    setMobileNo("");
-    setRole("");
-    setLockUser(checkChangeHandler);
-  };
+  const {
+    values,
+    errors,
+    isSubmitting,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik<{
+    userName: string;
+    email: string | number;
+    password: string;
+    mobileNo: string | number;
+    role: string;
+    lockUser: boolean;
+  }>({
+    initialValues: {
+      userName: "",
+      email: "",
+      password: "",
+      mobileNo: "",
+      role: "",
+      lockUser: false,
+    },
+    validationSchema: validations,
+    onSubmit,
+  });
 
   return (
-    <form onSubmit={formSubmitHandler}>
+    <form onSubmit={handleSubmit}>
       <Box
         sx={{
           margin: "auto",
-          // backgroundColor:"gray"
-       
-       
-         
         }}
       >
-        <Grid lg={6} item container spacing={3}  style={{ margin:"auto", padding:"5rem"}}>
+        <Grid
+          lg={6}
+          item
+          container
+          spacing={2}
+          style={{ margin: "auto", padding: "5rem" }}
+        >
           <Grid item lg={6} xs={20} sm={12}>
-            <label htmlFor="username">
+            <label htmlFor="userName">
               <b>User Name</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={8}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="text"
-              id="username"
-              onChange={(e) => setUserName(e.target.value)}
-              value={userName}
+              id="userName"
+              value={values.userName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.userName && touched.userName ? "input-error" : ""
+              }
             />
+            {errors.userName && touched.userName && (
+              <p className="error">{errors.userName}</p>
+            )}
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="email">
               <b>E- Mail Address</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={8}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="email"
               id="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.email && touched.email ? "input-error" : ""}
             />
+            {errors.email && touched.email && (
+              <p className="error">{errors.email}</p>
+            )}
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="password">
               <b>Password</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={8}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="password"
               id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.password && touched.password ? "input-error" : ""
+              }
             />
+            {errors.password && touched.password && (
+              <p className="error">{errors.password}</p>
+            )}
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
-            <label htmlFor="mobile">
+            <label htmlFor="mobileNo">
               <b>Mobile No.</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={8}>
+          <Grid item lg={6} xs={15} sm={6}>
             <input
               type="number"
-              id="mobile"
-              onChange={(e) => setMobileNo(e.target.value)}
-              value={mobileNo}
+              id="mobileNo"
+              value={values.mobileNo}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.mobileNo && touched.mobileNo ? "input-error" : ""
+              }
             />
+            {errors.mobileNo && touched.mobileNo && (
+              <p className="error">{errors.mobileNo}</p>
+            )}
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
             <label>
               <b>Role</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={15} sm={8}>
-            <select onChange={(e) => setRole(e.target.value)} value={role}>
+          <Grid item lg={6} xs={15} sm={6}>
+            <select
+              value={values.role}
+              id="role"
+              className={errors.role && touched.role ? "input-error" : ""}
+              onChange={handleChange}
+            >
               <option>Select</option>
               <option>Floor Manager</option>
+              <option>Option1</option>
               <option>Option2</option>
-              <option>Option3</option>
-              <option>option4</option>
+              <option>option3</option>
             </select>
+            {errors.role && touched.role && (
+              <p className="error">{errors.role}</p>
+            )}
           </Grid>
           <Grid item lg={6} xs={12} sm={12}>
             <label>
               <b>Lock User</b>
             </label>
           </Grid>
-          <Grid item lg={6} xs={12} sm={12} className={classes.checkbox}>
+          <Grid item lg={6} xs={12} sm={12} className="checkbox">
             <Checkbox
+              id="lockUser"
               size="small"
               checked={lockUser}
               onChange={checkChangeHandler}
+              onBlur={handleBlur}
             />
           </Grid>
           <Grid item lg={6} xs={12} sm={12}></Grid>
           <Grid item lg={6} xs={12} sm={12}>
-            <button className={classes.actions} type="submit">
+            <button className="actions" type="submit" disabled={isSubmitting}>
               Submit
             </button>
           </Grid>
