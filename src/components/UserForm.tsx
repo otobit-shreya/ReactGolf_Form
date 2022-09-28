@@ -9,7 +9,7 @@ const UserForm: React.FC<{}> = () => {
     console.log(values);
     console.log(actions);
     actions.resetForm();
-   setLockUser(checkChangeHandler);
+   setLockUser(!checkChangeHandler);
   }; 
   const [lockUser, setLockUser] = useState(false);
 
@@ -38,7 +38,7 @@ const UserForm: React.FC<{}> = () => {
       password: "",
       mobileNo: "",
       role: "",
-      lockUser: false,
+      lockUser: true,
     },
     validationSchema: validations,
     onSubmit,
@@ -167,6 +167,7 @@ const UserForm: React.FC<{}> = () => {
             <Checkbox
               id="lockUser"
               size="small"
+              value={values.lockUser}
               checked={lockUser}
               onChange={checkChangeHandler}
               onBlur={handleBlur}

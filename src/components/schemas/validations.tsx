@@ -18,5 +18,4 @@ export const validations = yup.object().shape({
     .matches(phoneRegExp, "Phone number is not valid")
     .required("Required*"),
   role: yup.string().required("Required*"),
-  lockUser: yup.bool().required("Required"),
 });
