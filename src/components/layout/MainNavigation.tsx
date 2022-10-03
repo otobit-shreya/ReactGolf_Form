@@ -13,7 +13,7 @@ const MainNavigation = () => {
             <Link to="/">Home Page</Link>
           </li>
           <div>
-            <Link className="btn btn-outline-primary" to="/userform">
+            <Link className="btn btn-outline-primary" to="/users/userform">
               Add User
             </Link>
           </div>

@@ -20,7 +20,7 @@ const Home = () => {
     const result = await axios.get("http://localhost:3003/users");
     setUsers(result.data);
   };
-  
+
   return (
     <>
       <table
@@ -58,7 +58,7 @@ const Home = () => {
                   className="btn btn-outline-primary"
                   style={{ marginRight: "5px", padding: "5px"}}
                 >
-                  <Link to="/edit" style={{textDecoration:"none"}}>
+                  <Link to="/users/edit"  style={{textDecoration:"none"}}>
                     Edit
                   </Link>
                 </button>

@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Layout from './components/layout/Layout';
 import NotFound from './pages/NotFound';
-import EditUser from './users/EditUser';
+import EditUserForm from './users/EditUserForm';
 
 const App: React.FC = ()=> {
   return (
@@ -14,8 +14,8 @@ const App: React.FC = ()=> {
    <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="*" element={<NotFound/>}/>
-    <Route path="/userform" element={<UserForm/>}/>
-    <Route path="/edit/:id" element={<EditUser/>}/> 
+    <Route path="/users/userform" element={<UserForm/>}/>
+    <Route path="/users/edit/:id" element={<EditUserForm/>}/>
    </Routes>
    </Layout>
    </BrowserRouter>

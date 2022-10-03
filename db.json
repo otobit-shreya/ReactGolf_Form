@@ -43,6 +43,15 @@
       "role": "Option1",
       "lockUser": true,
       "id": 6
+    },
+    {
+      "userName": "shreya",
+      "email": "shreyaarande@gmail.com",
+      "password": "3212Shreya@",
+      "mobileNo": 6354112055,
+      "role": "Floor Manager",
+      "lockUser": true,
+      "id": 7
     }
   ]
 }

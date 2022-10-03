@@ -6,10 +6,9 @@ import { validations } from "../components/schemas/validations";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const EditForm: React.FC<{}> = () => {
-
+const EditUserForm: React.FC<{}> = () => {
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
   const onSubmit = async (values: any, actions: any) => {
     console.log(values);
     console.log(actions);
@@ -19,19 +18,33 @@ const EditForm: React.FC<{}> = () => {
     navigate("/");
   };
   const [lockUser, setLockUser] = useState(false);
-
-  const loadUser = async()=>{
-    const result = await axios.get(`http://localhost:3003/users/${id}`);
-    console.log(result.data);
+  const [edit,setEdit] = useState({
+      initialValues:{
+        userName: "",
+        email: "",
+        password: "",
+        mobileNo: "",
+        role: "",
+        lockUser: true,
+    }
   }
-
-useEffect(()=>{
-    loadUser();
-},[])
+  
+  );
 
   const checkChangeHandler: any = () => {
     setLockUser(!lockUser);
   };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
+    const result = await axios.get(`http://localhost:3003/users/${id}`);
+    setEdit(result.data);
+  };
+
+ 
   const {
     values,
     errors,
@@ -42,20 +55,13 @@ useEffect(()=>{
     handleSubmit,
   } = useFormik<{
     userName: string;
-    email: string | number;
+    email: string;
     password: string;
-    mobileNo: string | number;
+    mobileNo: string;
     role: string;
     lockUser: boolean;
   }>({
-    initialValues: {
-      userName: "",
-      email: "",
-      password: "",
-      mobileNo: "",
-      role: "",
-      lockUser: true,
-    },
+    initialValues: edit,
     validationSchema: validations,
     onSubmit,
   });
@@ -204,4 +210,4 @@ useEffect(()=>{
   );
 };
 
-export default EditForm;
+export default EditUserForm;
