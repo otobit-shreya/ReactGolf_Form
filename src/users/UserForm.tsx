@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Grid, Box, Checkbox } from "@mui/material";
 import "./UserForm.css";
-import { validations } from "./schemas/validations";
+import { validations } from "../components/schemas/validations";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserForm: React.FC<{}> = () => {
-  const onSubmit = (values: any, actions: any) => {
+  const navigate = useNavigate();
+  const onSubmit = async (values: any, actions: any) => {
     console.log(values);
     console.log(actions);
     actions.resetForm();
-   setLockUser(!checkChangeHandler);
-  }; 
+    setLockUser(!checkChangeHandler);
+    await axios.post("http://localhost:3003/users", values);
+    navigate("/");
+  };
   const [lockUser, setLockUser] = useState(false);
 
   const checkChangeHandler: any = () => {
@@ -46,6 +51,9 @@ const UserForm: React.FC<{}> = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1 style={{ textAlign: "center", fontSize: "30px", marginTop: "8rem" }}>
+        Add User
+      </h1>
       <Box
         sx={{
           margin: "auto",
@@ -56,7 +64,7 @@ const UserForm: React.FC<{}> = () => {
           item
           container
           spacing={2}
-          style={{ margin: "auto", padding: "5rem" }}
+          style={{ margin: "auto", padding: "4rem" }}
         >
           <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="userName">

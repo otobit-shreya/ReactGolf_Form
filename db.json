@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userName": "Shreya",
+      "email": "shreya@gmail.com",
+      "mobileNo": "9654125890",
+      "role": "Developer"
+    },
+    {
+      "id": 2,
+      "userName": "Riddhi",
+      "email": "riddhi@gmail.com",
+      "mobileNo": "8866854215",
+      "role": "Tester"
+    },
+    {
+      "id": 3,
+      "userName": "Rahul",
+      "email": "rahul@gmail.com",
+      "mobileNo": "9654345890",
+      "role": "Manager"
+    },
+    {
+      "id": 4,
+      "userName": "Meet",
+      "email": "meet@gmail.com",
+      "mobileNo": "9484345890",
+      "role": "Designer"
+    },
+    {
+      "id": 5,
+      "userName": "Priya",
+      "email": "priya@gmail.com",
+      "mobileNo": "9654235890",
+      "role": "HR"
+    },
+    {
+      "userName": "Aarya",
+      "email": "aarya@gmail.com",
+      "password": "321Aarya@@",
+      "mobileNo": 8954123658,
+      "role": "Option1",
+      "lockUser": true,
+      "id": 6
+    }
+  ]
+}
