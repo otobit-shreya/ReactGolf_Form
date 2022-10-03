@@ -1,73 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { useFormik } from "formik";
-import { Grid, Box, Checkbox } from "@mui/material";
-import "./UserForm.css";
-import { validations } from "../components/schemas/validations";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { Grid, Box, Checkbox } from "@mui/material";
 
-const EditUserForm: React.FC<{}> = () => {
-  const navigate = useNavigate();
+const EditUserForm = () => {
+  let navigate = useNavigate();
   const { id } = useParams();
-  const onSubmit = async (values: any, actions: any) => {
-    console.log(values);
-    console.log(actions);
-    actions.resetForm();
-    setLockUser(!checkChangeHandler);
-    await axios.post("http://localhost:3003/users", values);
-    navigate("/");
-  };
   const [lockUser, setLockUser] = useState(false);
-  const [edit,setEdit] = useState({
-      initialValues:{
-        userName: "",
-        email: "",
-        password: "",
-        mobileNo: "",
-        role: "",
-        lockUser: true,
-    }
-  }
+  const [user, setUser] = useState({
+    userName: "",
+    email: "",
+    mobileNo: "",
+    role: "",
+    password:"",
+    lockUser:false,
+  });
+
+  const { userName, email, mobileNo, password, role} = user;
   
-  );
 
   const checkChangeHandler: any = () => {
     setLockUser(!lockUser);
+  };
+  const onInputChange = (event:any) => {
+    setUser({ ...user, [event.target.name]: event.target.value });
   };
 
   useEffect(() => {
     loadUser();
   }, []);
 
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3003/users/${id}`);
-    setEdit(result.data);
+  const submitHandler = async (event:any) => {
+    event.preventDefault();
+    setLockUser(!checkChangeHandler);
+    await axios.put(`http://localhost:3003/users/${id}`, user);
+    navigate("/");
   };
 
- 
-  const {
-    values,
-    errors,
-    isSubmitting,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik<{
-    userName: string;
-    email: string;
-    password: string;
-    mobileNo: string;
-    role: string;
-    lockUser: boolean;
-  }>({
-    initialValues: edit,
-    validationSchema: validations,
-    onSubmit,
-  });
-
+  const loadUser = async () => {
+    const result = await axios.get('http://localhost:3003/users/' +id);
+    setUser(result.data);
+  };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitHandler}>
       <h1 style={{ textAlign: "center", fontSize: "30px", marginTop: "8rem" }}>
         Edit User
       </h1>
@@ -90,18 +65,13 @@ const EditUserForm: React.FC<{}> = () => {
           </Grid>
           <Grid item lg={6} xs={15} sm={6}>
             <input
+              name="userName"
               type="text"
-              id="userName"
-              value={values.userName}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.userName && touched.userName ? "input-error" : ""
-              }
+              value={userName}
+              onChange={onInputChange}
+              
             />
-            {errors.userName && touched.userName && (
-              <p className="error">{errors.userName}</p>
-            )}
+            
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="email">
@@ -110,16 +80,11 @@ const EditUserForm: React.FC<{}> = () => {
           </Grid>
           <Grid item lg={6} xs={15} sm={6}>
             <input
+            name="email"
               type="email"
-              id="email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.email && touched.email ? "input-error" : ""}
+              value={email}
+              onChange={onInputChange}
             />
-            {errors.email && touched.email && (
-              <p className="error">{errors.email}</p>
-            )}
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="password">
@@ -128,18 +93,11 @@ const EditUserForm: React.FC<{}> = () => {
           </Grid>
           <Grid item lg={6} xs={15} sm={6}>
             <input
+              name="password"
               type="password"
-              id="password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.password && touched.password ? "input-error" : ""
-              }
+              value={password}
+              onChange={onInputChange} 
             />
-            {errors.password && touched.password && (
-              <p className="error">{errors.password}</p>
-            )}
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
             <label htmlFor="mobileNo">
@@ -148,18 +106,13 @@ const EditUserForm: React.FC<{}> = () => {
           </Grid>
           <Grid item lg={6} xs={15} sm={6}>
             <input
+            name="mobileNo"
               type="number"
-              id="mobileNo"
-              value={values.mobileNo}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.mobileNo && touched.mobileNo ? "input-error" : ""
-              }
+              value={mobileNo}
+              onChange={onInputChange}
+             
             />
-            {errors.mobileNo && touched.mobileNo && (
-              <p className="error">{errors.mobileNo}</p>
-            )}
+           
           </Grid>
           <Grid item lg={6} xs={20} sm={12}>
             <label>
@@ -168,10 +121,9 @@ const EditUserForm: React.FC<{}> = () => {
           </Grid>
           <Grid item lg={6} xs={15} sm={6}>
             <select
-              value={values.role}
-              id="role"
-              className={errors.role && touched.role ? "input-error" : ""}
-              onChange={handleChange}
+              value={role}
+              name="role"
+              onChange={onInputChange}
             >
               <option>Select</option>
               <option>Floor Manager</option>
@@ -179,9 +131,7 @@ const EditUserForm: React.FC<{}> = () => {
               <option>Option2</option>
               <option>option3</option>
             </select>
-            {errors.role && touched.role && (
-              <p className="error">{errors.role}</p>
-            )}
+            
           </Grid>
           <Grid item lg={6} xs={12} sm={12}>
             <label>
@@ -190,17 +140,16 @@ const EditUserForm: React.FC<{}> = () => {
           </Grid>
           <Grid item lg={6} xs={12} sm={12} className="checkbox">
             <Checkbox
-              id="lockUser"
+            name="lockUser"
               size="small"
-              value={values.lockUser}
+              value={lockUser}
               checked={lockUser}
               onChange={checkChangeHandler}
-              onBlur={handleBlur}
             />
           </Grid>
           <Grid item lg={6} xs={12} sm={12}></Grid>
           <Grid item lg={6} xs={12} sm={12}>
-            <button className="actions" type="submit" disabled={isSubmitting}>
+            <button className="actions" type="submit" >
               Submit
             </button>
           </Grid>

@@ -7,6 +7,7 @@ type user = {
   email: String | number;
   mobileNo: String | number;
   role: String;
+  password:String | number;
 };
 
 const Home = () => {
@@ -21,6 +22,11 @@ const Home = () => {
     setUsers(result.data);
   };
 
+  const deleteUser = async (id:any) => {
+    await axios.delete(`http://localhost:3003/users/${id}`)
+    loadUsers();
+  }
+
   return (
     <>
       <table
@@ -34,6 +40,7 @@ const Home = () => {
             <th scope="col">Email</th>
             <th scope="col">Mobile No</th>
             <th scope="col">Role</th>
+            <th scope="col">Password</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -45,12 +52,13 @@ const Home = () => {
               <td>{user.email}</td>
               <td>{user.mobileNo}</td>
               <td>{user.role}</td>
+              <td>{user.password}</td>
               <td>
                 <button
                   className="btn btn-primary"
                   style={{ marginRight: "5px", padding: "5px" }}
                 >
-                  <Link to="/userform" style={{ color: "white", textDecoration:"none" }}>
+                  <Link to={`/users/view/${user.id}`} style={{ color: "white", textDecoration:"none" }}>
                     View
                   </Link>
                 </button>
@@ -58,11 +66,11 @@ const Home = () => {
                   className="btn btn-outline-primary"
                   style={{ marginRight: "5px", padding: "5px"}}
                 >
-                  <Link to="/users/edit"  style={{textDecoration:"none"}}>
+                  <Link to={`/users/edit/${user.id}`}  style={{textDecoration:"none"}}>
                     Edit
                   </Link>
                 </button>
-                <button className="btn btn-danger" style={{ padding: "5px" }}>
+                <button className="btn btn-danger" style={{ padding: "5px" }} onClick={()=>deleteUser(user.id)}>
                   Delete
                 </button>
               </td>

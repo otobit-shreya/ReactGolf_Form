@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Layout from './components/layout/Layout';
 import NotFound from './pages/NotFound';
 import EditUserForm from './users/EditUserForm';
+import ViewUserForm from './users/ViewUserForm';
 
 const App: React.FC = ()=> {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = ()=> {
     <Route path="*" element={<NotFound/>}/>
     <Route path="/users/userform" element={<UserForm/>}/>
     <Route path="/users/edit/:id" element={<EditUserForm/>}/>
+    <Route path="/users/view/:id" element={<ViewUserForm/>}/>
    </Routes>
    </Layout>
    </BrowserRouter>

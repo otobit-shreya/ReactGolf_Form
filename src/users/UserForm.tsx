@@ -32,7 +32,7 @@ const UserForm: React.FC<{}> = () => {
   } = useFormik<{
     userName: string;
     email: string | number;
-    password: string;
+    password: string | number;
     mobileNo: string | number;
     role: string;
     lockUser: boolean;
@@ -111,8 +111,8 @@ const UserForm: React.FC<{}> = () => {
           </Grid>
           <Grid item lg={6} xs={15} sm={6}>
             <input
-              type="password"
-              id="password"
+            
+             id="password"
               value={values.password}
               onChange={handleChange}
               onBlur={handleBlur}
